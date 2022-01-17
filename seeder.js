@@ -7,41 +7,48 @@ const loading = require("loading-cli");
 const { MONGODB_URI } = process.env;
 
 
-/**
- * constants
-//  */
-// const client = new MongoClient(MONGODB_URI);
-/**
- * constants
- */
-const uri = "mongodb://localhost:27017/wine";
+
+const uri = "mongodb://localhost:27017/salon";
 const client = new MongoClient(uri);
 
 async function main() {
   try {
     await client.connect();
     const db = client.db();
-    const results = await db.collection("tastings").find({}).count();
+    const users = await db.collection("Users").find({}).count();
+    const services = await db.collection("Services").find({}).count();
+    const bookings = await db.collection("Bookings").find({}).count();
 
     /**
      * If existing records then delete the current collections
      */
-    if (results) {
+    if (users) {
       db.dropDatabase();
     }
+    if (services) {
+        db.dropDatabase();
+    }
+    if (bookings) {
+        db.dropDatabase();
+    }
+
 
     /**
      * This is just a fun little loader module that displays a spinner
      * to the command line
      */
-    const load = loading("importing your wine 🍷!!").start();
+    const load = loading("importing your Database 🍷!!").start();
 
     /**
      * Import the JSON data into the database
      */
 
-    const data = await fs.readFile(path.join(__dirname, "wine.json"), "utf8");
-    await db.collection("tastings").insertMany(JSON.parse(data));
+    const usersdata = await fs.readFile(path.join(__dirname, "users.json"), "utf8");
+    const servicessdata = await fs.readFile(path.join(__dirname, "services.json"), "utf8");
+    const bookingssdata = await fs.readFile(path.join(__dirname, "bookings.json"), "utf8");
+    await db.collection("Users").insertMany(JSON.parse(usersdata));
+    await db.collection("Services").insertMany(JSON.parse(servicessdata));
+    await db.collection("Bookings").insertMany(JSON.parse(bookingssdata));
 
     /**
      * This perhaps appears a little more complex than it is. Below, we are
@@ -49,11 +56,11 @@ async function main() {
      * we tidy up the output so it represents the format we need for our new collection
      */
 
-    const wineTastersRef = await db.collection("tastings").aggregate([
-      { $match: { taster_name: { $ne: null } } },
+    const salonCusmersRef = await db.collection("customers").aggregate([
+      { $match: { customer_name: { $ne: null } } },
       {
         $group: {
-          _id: "$taster_name",
+          _id: "$customer_name",
           twitter: { $first: "$taster_twitter_handle" },
           tastings: { $sum: 1 },
         },
