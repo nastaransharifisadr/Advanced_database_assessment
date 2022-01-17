@@ -1,0 +1,27 @@
+{
+  "name": "Advanced_database_assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "seeder.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nastaransharifisadr/Advanced_database_assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nastaransharifisadr/Advanced_database_assessment/issues"
+  },
+  "homepage": "https://github.com/nastaransharifisadr/Advanced_database_assessment#readme",
+  "dependencies": {
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.7",
+    "node": "^17.3.1",
+    "nodemon": "^2.0.15"
+  }
+}
