@@ -1,26 +1,22 @@
 [
     {
         "service_name":"Acrylic extension",
-        "firstname":"Nastaran",
-        "lastname":"Sadr",
+        "email" : "nastaransharifisadr2018@gmail.com",
         "daterequest":"04/02/2022"
     },
     {
         "service_name":"Gel extension",
-        "firstname":"Chris",
-        "lastname":"Isbell",
+        "email" : "isbell2018@gmail.com",
         "daterequest":"14/02/2022"
     },
     {
         "service_name":"Facial",
-        "firstname":"Cathy",
-        "lastname":"Gleeson",
+        "email" : "cathygleeson@gmail.com",
         "daterequest":"24/02/2022"
     },
     {
         "service_name":"Gel extension",
-        "firstname":"Cathy",
-        "lastname":"Gleeson",
+        "email" : "cathygleeson@gmail.com",
         "daterequest":"24/02/2022"
     }
 

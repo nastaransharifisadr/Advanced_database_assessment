@@ -2,43 +2,22 @@
     {
         "firstname":"Nastaran",
         "lastname":"Sadr",
-        "email":"nastaransharifisadr2018@gmail.com",
-        "password":"Admin",
-        "typeofuser":"Admin"
+        "email" : "nastaransharifisadr2018@gmail.com",
+        "password" :"admin",
+        "typeofuser" : "Admin"
     },
-    {
-        "firstname":"Chris",
+    {   "firstname":"Chris",
         "lastname":"Isbell",
-        "email":"Chris@gmail.com",
-        "password":"Admin",
-        "typeofuser":"Customer"
-    },
-    {
-        "firstname":"Mahi",
-        "lastname":"Eghlima",
-        "email":"Mahi.eghlima@gmail.com",
-        "password":"Admin",
-        "typeofuser":"Customer"
+        "email" : "isbell2018@gmail.com",
+        "password" :"admin",
+        "typeofuser" : "customer"
     },
     {
         "firstname":"Cathy",
         "lastname":"Gleeson",
-        "email":"gleeson2001@hotmail.com",
-        "password":"Admin",
-        "typeofuser":"Customer"
-    },
-    {
-        "firstname":"Michelle",
-        "lastname":"Gates",
-        "email":"michelle@gmail.com",
-        "password":"Admin",
-        "typeofuser":"Customer"
-    },
-    {
-        "firstname":"Clare",
-        "lastname":"Wright",
-        "email":"clare@gmail.com",
-        "password":"Admin",
-        "typeofuser":"Customer"
+        "email" : "cathygleeson@gmail.com",
+        "password" :"admin",
+        "typeofuser" : "customer"
     }
+
 ]

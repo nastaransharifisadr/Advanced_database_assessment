@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
+const Users = require("./models/User");
 
 const usersCon = require("./controllers/Users");
 const servicesCon = require("./controllers/services");
@@ -45,7 +46,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(expressSession({ secret: 'foo barr', cookie: { expires: new Date(253402300000000) } }))
+app.use(expressSession({ 
+  secret: 'foo barr', 
+  cookie: { expires: new Date(253402300000000) },
+}))
+
 
 
 /*creating path for services*/
@@ -77,16 +82,15 @@ app.post("/bookings/update/:id", bookingsCon.update);
 /*creating path for users*/
 
 
-app.get("/create-user", authMiddleware, (req, res) => {
-res.render("create-user", { errors: {} });
+app.get("/join", (req, res) => {
+  res.render('create-user', { errors: {} })
 });
 
-app.post("/create-user", usersCon.create);
-
-app.get("/users", usersCon.list);
-app.get("/users/delete/:id", usersCon.delete);
-app.get("/users/update/:id", usersCon.edit);
-app.post("/users/update/:id", usersCon.update);
+app.post("/join", userController.create);
+app.get("/login", (req, res) => {
+  res.render('login-user', { errors: {} })
+});
+app.post("/login", userController.login);
 
 app.listen(PORT, () => {
 console.log(

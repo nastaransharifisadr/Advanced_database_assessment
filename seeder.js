@@ -22,7 +22,7 @@ async function main() {
     /**
      * If existing records then delete the current collections
      */
-    if (users) {
+    if (user) {
       db.dropDatabase();
     }
     if (services) {
@@ -37,7 +37,7 @@ async function main() {
      * This is just a fun little loader module that displays a spinner
      * to the command line
      */
-    const load = loading("importing your Database 🍷!!").start();
+    const load = loading("importing your Database !!").start();
 
     /**
      * Import the JSON data into the database
@@ -55,36 +55,8 @@ async function main() {
      * we tidy up the output so it represents the format we need for our new collection
      */
 
-    const updatedusersRef = await db.collection("Users").aggregate([
-      { $match: { customer_name: { $ne: null } } },
-      {
-        $group: {
-          _id: "$customer_name",
-          twitter: { $first: "$taster_twitter_handle" },
-          tastings: { $sum: 1 },
-        },
-
-      },
-      {
-        $project: {
-          _id: 0,
-          name: '$_id',
-          twitter: '$twitter',
-          tastings: '$tastings'
-        },
-      },
-    ]);
-    /**
-     * Below, we output the results of our aggregate into a
-     * new collection
-     */
-    const wineTasters = await wineTastersRef.toArray();
-    await db.collection("tasters").insertMany(wineTasters);
-
-    /** This data manipulation is to reference each document in the
-     * tastings collection to a taster id. Further to this we also take the opportunity to
-     * tidy up points (converting it to a int) and regions, adding them to a an array
-     */
+   
+ 
 
      const updatedusersRef = db.collection("Users").find({});
      const updatedusers = await updatedusersRef.toArray();
