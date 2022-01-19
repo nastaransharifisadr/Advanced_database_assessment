@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
-const Users = require("./models/User");
+const Users = require("./models/Users");
 
 const usersCon = require("./controllers/Users");
 const servicesCon = require("./controllers/services");
@@ -52,6 +52,15 @@ app.use(expressSession({
 }))
 
 
+const authMiddleware = async (req, res, next) => {
+  const user = await Users.findById(req.session.userID);
+  if (!user) {
+    return res.redirect('/');
+  }
+  next()
+}
+
+
 
 /*creating path for services*/
 app.get("/create-services", authMiddleware, (req, res) => {
@@ -73,7 +82,7 @@ res.render("create-bookings", { errors: {} });
 
 app.post("/create-bookings", bookingsCon.create);
 
-app.get("/bookings", recordsCon.list);
+app.get("/bookings", bookingsCon.list);
 app.get("/bookings/delete/:id", bookingsCon.delete);
 app.get("/bookings/update/:id", bookingsCon.edit);
 app.post("/bookings/update/:id", bookingsCon.update);
@@ -86,11 +95,11 @@ app.get("/join", (req, res) => {
   res.render('create-user', { errors: {} })
 });
 
-app.post("/join", userController.create);
+app.post("/join", usersCon.create);
 app.get("/login", (req, res) => {
   res.render('login-user', { errors: {} })
 });
-app.post("/login", userController.login);
+app.post("/login", usersCon.login);
 
 app.listen(PORT, () => {
 console.log(
