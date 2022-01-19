@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 const servicesSchema = new Schema(
     {
         service_name: { type: String, required: [true, 'Service Name is required'] },
-        price: { type: Number, required: [true, 'Price is required'] }
+        Price: { type: Number, required: [true, 'Price is required'] }
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Services Type", servicesSchema);
+module.exports = mongoose.model("Services", servicesSchema);

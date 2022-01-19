@@ -6,6 +6,7 @@ const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 const Users = require("./models/Users");
+const User = require("./models/User");
 const {
   WEB_PORT
 } = process.env;
@@ -13,7 +14,8 @@ const {
 const usersCon = require("./controllers/Users");
 const servicesCon = require("./controllers/services");
 const bookingsCon = require("./controllers/bookings");
-
+const userController = require("./controllers/user");
+const homeController = require("./controllers/home")
 
 
 const app = express();
@@ -54,6 +56,15 @@ app.use(expressSession({
   cookie: { expires: new Date(253402300000000) },
 }))
 
+app.use("*", async (req, res, next) => {
+  global.user = false;
+  if (req.session.userID && !global.user) {
+    const user = await User.findById(req.session.userID);
+    global.user = user;
+  }
+  next();
+})
+
 
 const authMiddleware = async (req, res, next) => {
   const user = await Users.findById(req.session.userID);
@@ -64,10 +75,17 @@ const authMiddleware = async (req, res, next) => {
 }
 
 
-app.get("/",servicesCon.list);
+app.get("/",homeController.list);
+
+app.get("/logout", async (req, res) => {
+  req.session.destroy();
+  global.user = false;
+  res.redirect('/');
+})
+
 /*creating path for services*/
 app.get("/create-services", authMiddleware, (req, res) => {
-res.render("create-services", { errors: {} });
+   res.render("create-services", { errors: {} });
 });
 app.post("/create-services", servicesCon.create);
 app.get("/services", servicesCon.list);
@@ -77,21 +95,23 @@ app.post("/services/update/:id", servicesCon.update);
 
 
 
+
 /*creating path for bookings*/
 
-app.get("/create-bookings", authMiddleware, (req, res) => {
-res.render("create-bookings", { errors: {} });
-});
 
+app.get("/create-bookings",bookingsCon.createView);
 app.post("/create-bookings", bookingsCon.create);
-
+app.get("/update-bookings/:id", bookingsCon.edit);
 app.get("/bookings", bookingsCon.list);
 app.get("/bookings/delete/:id", bookingsCon.delete);
-app.get("/bookings/update/:id", bookingsCon.edit);
-app.post("/bookings/update/:id", bookingsCon.update);
-
 
 /*creating path for users*/
+app.get("/create-users",usersCon.createView);
+app.post("/create-bookings", usersCon.create);
+app.get("/update-bookings/:id", usersCon.edit);
+app.get("/bookings", usersCon.list);
+app.get("/bookings/delete/:id", usersCon.delete);
+
 
 
 app.get("/join", (req, res) => {

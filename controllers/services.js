@@ -3,10 +3,12 @@ const bodyParser = require("body-parser");
 const { findById } = require("../models/Services");
 
 exports.list = async(req,res) => {
+  console.log(req.session);
 
     try 
     {
     const services =await Services.find({});
+    console.log(services);
     res.render("services",{services:services});
 
     }catch(e){
@@ -31,27 +33,27 @@ exports.delete = async(req,res)=>{
 
 exports.create = async (req, res) => {
 
-    try {
-      await Services.create({ 
-        service_name:req.body.service_name,
-        price:req.body.price
-      })
-      res.redirect('/services/?message=services record has been created')
-    } catch (e) {
-      if (e.errors) {
-        console.log(e.errors);
-        res.render('create-services', { errors: e.errors })
-        return;
-      }
-      return res.status(400).send({
-        message: JSON.parse(e),
-      });
+  try {
+    const services = new Services({ service_name: req.body.service_name, price: req.body.price });
+    awaitservices.save();
+    res.redirect('/services/?message=taster has been created')
+  } catch (e) {
+    if (e.errors) {
+      console.log(e.errors);
+      res.render('create-services', { errors: e.errors })
+      return;
     }
+    return res.status(400).send({
+      message: JSON.parse(e),
+    });
   }
+}
+
   exports.edit = async (req, res) => {
     const id = req.params.id;
     try {
       const services = await Services.findById(id);
+      console.log(services);
       res.render('update-services', {services:services, id: id });
     } catch (e) {
       res.status(404).send({
