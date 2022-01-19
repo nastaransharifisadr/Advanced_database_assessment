@@ -15,6 +15,45 @@ exports.list = async(req,res) => {
 };
 
 
+exports.edit = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const bookings = await Bookings.findById(id);
+    res.render('update-bookings', { bookings: bookings, id: id });
+  } catch (e) {
+    res.status(404).send({
+      message: `could find booking ${id}.`,
+    });
+  }
+};
+
+exports.create = async (req, res) => {
+  try {
+
+    const bookings = await Bookings.findById(req.body.bookings_id);
+    await Bookings.create({
+      service_name: req.body.service_name,
+      firstname: bookings.firstname,
+      lastname: bookings.lastname,
+      email: bookings.email,
+      daterequest: bookings.daterequest,
+      bookings_id: req.body.bookings_id,
+    })
+
+    res.redirect('/bookings/?message=bookings has been created')
+  } catch (e) {
+    if (e.errors) {
+      res.render('create-bookings', { errors: e.errors })
+      return;
+    }
+    return res.status(400).send({
+      message: JSON.parse(e),
+    });
+  }
+}
+
+
+
 exports.delete = async(req,res)=>{
     const id = req.params.id;
   try {
@@ -28,37 +67,8 @@ exports.delete = async(req,res)=>{
 };
 
 
-exports.create = async (req, res) => {
 
-    try {
-      await Bookings.create({ 
-        service_name:req.body.service_name,
-        email:req.body.email,
-        daterequest: req.body.daterequest
-      })
-      res.redirect('/bookings/?message=bookings record has been created')
-    } catch (e) {
-      if (e.errors) {
-        console.log(e.errors);
-        res.render('create-bookings', { errors: e.errors })
-        return;
-      }
-      return res.status(400).send({
-        message: JSON.parse(e),
-      });
-    }
-  }
-  exports.edit = async (req, res) => {
-    const id = req.params.id;
-    try {
-      const bookings = await Bookings.findById(id);
-      res.render('update-bookings', { bookings: bookings, id: id });
-    } catch (e) {
-      res.status(404).send({
-        message: `could find booking ${id}.`,
-      });
-    }
-  };
+  
   
   exports.update = async (req, res) => {
     const id = req.params.id;

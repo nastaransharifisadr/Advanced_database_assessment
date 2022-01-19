@@ -35,7 +35,7 @@ exports.create = async (req, res) => {
 
   try {
     const services = new Services({ service_name: req.body.service_name, price: req.body.price });
-    awaitservices.save();
+    await services.save();
     res.redirect('/services/?message=taster has been created')
   } catch (e) {
     if (e.errors) {

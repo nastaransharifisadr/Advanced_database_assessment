@@ -15,14 +15,14 @@ async function main() {
   try {
     await client.connect();
     const db = client.db();
-    const users = await db.collection("users").find({}).count();
+    const user = await db.collection("user").find({}).count();
     const services = await db.collection("services").find({}).count();
     const bookings = await db.collection("bookings").find({}).count();
 
     /**
      * If existing records then delete the current collections
      */
-    if (users) {
+    if (user) {
       db.dropDatabase();
     }
     if (services) {
@@ -43,10 +43,10 @@ async function main() {
      * Import the JSON data into the database
      */
 
-    const usersdata = await fs.readFile(path.join(__dirname, "users.json"), "utf8");
+    const userdata = await fs.readFile(path.join(__dirname, "user.json"), "utf8");
     const servicessdata = await fs.readFile(path.join(__dirname, "services.json"), "utf8");
     const bookingssdata = await fs.readFile(path.join(__dirname, "bookings.json"), "utf8");
-    await db.collection("Users").insertMany(JSON.parse(usersdata));
+    await db.collection("User").insertMany(JSON.parse(userdata));
     await db.collection("Services").insertMany(JSON.parse(servicessdata));
     await db.collection("Bookings").insertMany(JSON.parse(bookingssdata));
 
@@ -58,14 +58,13 @@ async function main() {
    
  
 
-     const updatedusersRef = db.collection("Users").find({});
-     const updatedusers = await updatedusersRef.toArray();
-     updatedusers.forEach(async ({ _id, name }) => {
-       await db.collection("Bookings").updateMany({ user_name: name }, [
+     const updateduserRef = db.collection("User").find({});
+     const updateduser = await updateduserRef.toArray();
+     updateduser.forEach(async ({ _id, name }) => {
+       await db.collection("Bookings").updateMany({}, [
          {
            $set: {
              user_id: _id,
-             user_name: ["$firstname", "$lastname"],
            },
          },
        ]);
@@ -74,8 +73,8 @@ async function main() {
 
    
     await db
-      .collection("Users")
-      .updateMany({}, { $unset: { firstname: "", lastname: " " } });
+      .collection("User")
+      .updateMany({}, { $unset: { email: "", password: " " } });
 
     
 

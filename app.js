@@ -5,13 +5,12 @@ const mongoose = require("mongoose");
 const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
-const Users = require("./models/Users");
 const User = require("./models/User");
 const {
   WEB_PORT
 } = process.env;
 
-const usersCon = require("./controllers/Users");
+
 const servicesCon = require("./controllers/services");
 const bookingsCon = require("./controllers/bookings");
 const userController = require("./controllers/user");
@@ -99,18 +98,12 @@ app.post("/services/update/:id", servicesCon.update);
 /*creating path for bookings*/
 
 
-app.get("/create-bookings",bookingsCon.createView);
+
 app.post("/create-bookings", bookingsCon.create);
 app.get("/update-bookings/:id", bookingsCon.edit);
 app.get("/bookings", bookingsCon.list);
 app.get("/bookings/delete/:id", bookingsCon.delete);
 
-/*creating path for users*/
-app.get("/create-users",usersCon.createView);
-app.post("/create-bookings", usersCon.create);
-app.get("/update-bookings/:id", usersCon.edit);
-app.get("/bookings", usersCon.list);
-app.get("/bookings/delete/:id", usersCon.delete);
 
 
 
@@ -118,12 +111,13 @@ app.get("/join", (req, res) => {
   res.render('create-user', { errors: {} })
 });
 
-app.post("/join", usersCon.create);
+app.post("/join", userController.create);
 app.get("/login", (req, res) => {
   res.render('login-user', { errors: {} })
 });
-app.post("/login", usersCon.login);
+app.post("/login", userController.login);
 
+app.get('/search-bookings', (req,res)=> res.render('search-bookings'));
 app.listen(WEB_PORT, () => {
 console.log(
     `Example app listening at http://localhost:${WEB_PORT}`,
