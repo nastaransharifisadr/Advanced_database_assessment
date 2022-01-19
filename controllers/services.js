@@ -6,7 +6,7 @@ exports.list = async(req,res) => {
 
     try 
     {
-    const services = Services.find({});
+    const services =await Services.find({});
     res.render("services",{services:services});
 
     }catch(e){
@@ -54,7 +54,7 @@ exports.create = async (req, res) => {
       res.render('update-services', {services:services, id: id });
     } catch (e) {
       res.status(404).send({
-      message: `could find services ${id}.`,
+    message: `could find services ${id}.`,
       });
     }
   };

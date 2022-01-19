@@ -6,7 +6,7 @@ exports.list = async(req,res) => {
 
     try 
     {
-    const bookings = Bookings.find({});
+    const bookings = await Bookings.find({});
     res.render("bookings",{bookings:bookings});
 
     }catch(e){

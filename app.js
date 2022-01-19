@@ -6,6 +6,9 @@ const chalk = require("chalk");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 const Users = require("./models/Users");
+const {
+  WEB_PORT
+} = process.env;
 
 const usersCon = require("./controllers/Users");
 const servicesCon = require("./controllers/services");
@@ -61,7 +64,7 @@ const authMiddleware = async (req, res, next) => {
 }
 
 
-
+app.get("/",servicesCon.list);
 /*creating path for services*/
 app.get("/create-services", authMiddleware, (req, res) => {
 res.render("create-services", { errors: {} });
@@ -101,9 +104,9 @@ app.get("/login", (req, res) => {
 });
 app.post("/login", usersCon.login);
 
-app.listen(PORT, () => {
+app.listen(WEB_PORT, () => {
 console.log(
-    `Example app listening at http://localhost:${PORT}`,
+    `Example app listening at http://localhost:${WEB_PORT}`,
     chalk.green("✓")
 );
 });
