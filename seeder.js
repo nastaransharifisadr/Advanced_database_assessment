@@ -15,14 +15,14 @@ async function main() {
   try {
     await client.connect();
     const db = client.db();
-    const users = await db.collection("Users").find({}).count();
-    const services = await db.collection("Services").find({}).count();
-    const bookings = await db.collection("Bookings").find({}).count();
+    const users = await db.collection("users").find({}).count();
+    const services = await db.collection("services").find({}).count();
+    const bookings = await db.collection("bookings").find({}).count();
 
     /**
      * If existing records then delete the current collections
      */
-    if (user) {
+    if (users) {
       db.dropDatabase();
     }
     if (services) {
@@ -91,7 +91,9 @@ async function main() {
   } catch (error) {
     console.error("error:", error);
     process.exit();
+    console.log(e);
   }
+  
 }
 
 main();

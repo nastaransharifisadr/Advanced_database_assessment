@@ -11,6 +11,7 @@ exports.list = async(req,res) => {
 
     }catch(e){
     res.status(404).send ({ message: "could not list Services" });
+    console.log(e);
     } 
 };
 
