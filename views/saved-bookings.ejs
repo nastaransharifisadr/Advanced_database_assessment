@@ -16,7 +16,15 @@
 
 
   <%- include('common/header'); %>
+  <div class="container">
+    <h1 class="text-center">Saved Bookings</h1>
+    <ul class="list-group">
+    <% bookings.forEach(Booking => { %>
+        <li class="list-group-item">  <%= Booking.firstname %></li>
+    <%})%>
 
+    </ul>
+  </div>
   
 
 
