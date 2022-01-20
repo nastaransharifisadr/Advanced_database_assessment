@@ -1,11 +1,11 @@
-const Services = require('../models/Services');
+const services = require('../models/Services');
 
 exports.list = async(req,res) => {
     console.log(req.session);
   
       try 
       {
-      const services =await Services.find({});
+      const services =await services.find({});
       console.log(services);
       res.render("services",{services:services});
   
