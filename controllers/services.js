@@ -59,6 +59,7 @@ exports.create = async (req, res) => {
       res.status(404).send({
     message: `could find services ${id}.`,
       });
+      console.log(e);
     }
   };
   

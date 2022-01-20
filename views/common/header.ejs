@@ -1,27 +1,27 @@
  <!------------Logo Design--------------->
  <section  id="nav-bar">
-    <nav class="navbar navbar-expand-lg navbar-light ">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Diamon Beauty</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"> Diamond Beauty </a>
+    <div class="navbar">
+      <div class="navbar-nav">
+        <a class="nav-link active" href="/">
+          Home <span class="sr-only">(current)</span>
+        </a>
+        <a class="nav-link" href="services"> View Services</a>
+        <a class="nav-link" href="create-bookings"> create Bookings </a>
       
-        <div class="nav justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="index">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="users">Users</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services">services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Bookings">bookings</a>
-            </li>          
-          </ul>
-        </div>
+        <% if(user) { %>
+        <a class="nav-link" href="saved-bookings"> Search Bookings</a>
+        <a class="nav-link" href="services">Add/remove services</a>
+        <a class="nav-link" href="bookings"> Check Bookings</a>
+        <a class="nav-link" href="join"> Register </a>
+        <a class="nav-link" href="logout"> <%= user.email %> (Logout) </a> <%
+        }%> <% if(!user) { %>
+        <a class="nav-link" href="login"> Login </a>
+        <% } %>
       </div>
-    </nav>
+    </div>
+  </nav>
  </section >  
  <!---------------------------- Banner Design -------------->
  <!-- Hero Banner Section -->

@@ -66,7 +66,7 @@ app.use("*", async (req, res, next) => {
 
 
 const authMiddleware = async (req, res, next) => {
-  const user = await Users.findById(req.session.userID);
+  const user = await User.findById(req.session.userID);
   if (!user) {
     return res.redirect('/');
   }
@@ -89,7 +89,7 @@ app.get("/create-services", authMiddleware, (req, res) => {
 app.post("/create-services", servicesCon.create);
 app.get("/services", servicesCon.list);
 app.get("/services/delete/:id", servicesCon.delete);
-app.get("/services/update/:id", servicesCon.edit);
+app.get("/services/edit/:id", servicesCon.edit);
 app.post("/services/update/:id", servicesCon.update);
 
 
