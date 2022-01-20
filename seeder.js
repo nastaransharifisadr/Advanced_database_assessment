@@ -46,9 +46,9 @@ async function main() {
     const userdata = await fs.readFile(path.join(__dirname, "user.json"), "utf8");
     const servicessdata = await fs.readFile(path.join(__dirname, "services.json"), "utf8");
     const bookingssdata = await fs.readFile(path.join(__dirname, "bookings.json"), "utf8");
-    await db.collection("User").insertMany(JSON.parse(userdata));
-    await db.collection("Services").insertMany(JSON.parse(servicessdata));
-    await db.collection("Bookings").insertMany(JSON.parse(bookingssdata));
+    await db.collection("user").insertMany(JSON.parse(userdata));
+    await db.collection("services").insertMany(JSON.parse(servicessdata));
+    await db.collection("bookings").insertMany(JSON.parse(bookingssdata));
 
     /**
      * grouping the wine tasters and summing their total tastings. Finally,
@@ -61,7 +61,7 @@ async function main() {
      const updateduserRef = db.collection("User").find({});
      const updateduser = await updateduserRef.toArray();
      updateduser.forEach(async ({ _id, name }) => {
-       await db.collection("Bookings").updateMany({}, [
+       await db.collection("bookings").updateMany({}, [
          {
            $set: {
              user_id: _id,
@@ -73,7 +73,7 @@ async function main() {
 
    
     await db
-      .collection("User")
+      .collection("user")
       .updateMany({}, { $unset: { email: "", password: " " } });
 
     

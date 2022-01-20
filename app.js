@@ -97,9 +97,7 @@ app.post("/services/update/:id", servicesCon.update);
 
 /*creating path for bookings*/
 
-app.get("/create-bookings", authMiddleware, (req, res) => {
-  res.render("create-bookings", { errors: {} });
-});
+
 
 app.post("/create-bookings", bookingsCon.create);
 app.get("/update-bookings/:id", bookingsCon.edit);

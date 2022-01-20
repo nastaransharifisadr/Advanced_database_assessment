@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const servicesSchema = new Schema(
     {
         service_name: { type: String, required: [true, 'Service Name is required'] },
-        Price: { type: Number, required: [true, 'Price is required'] }
+        price: { type: Number, required: [true, 'price is required'] }
     },
     { timestamps: true }
 );
