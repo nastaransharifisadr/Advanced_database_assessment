@@ -39,6 +39,7 @@ exports.create = async (req, res) => {
       daterequest: bookings.daterequest,
       bookings_id: req.body.bookings_id,
     })
+    console.log(bookings)
 
     res.redirect('/bookings/?message=bookings has been created')
   } catch (e) {

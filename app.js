@@ -87,6 +87,7 @@ app.get("/create-services", authMiddleware, (req, res) => {
    res.render("create-services", { errors: {} });
 });
 app.post("/create-services", servicesCon.create);
+app.get("/view-services", servicesCon.create);
 app.get("/services", servicesCon.list);
 app.get("/services/delete/:id", servicesCon.delete);
 app.get("/services/edit/:id", servicesCon.edit);
@@ -97,7 +98,9 @@ app.post("/services/update/:id", servicesCon.update);
 
 /*creating path for bookings*/
 
-
+app.get("/create-bookings", authMiddleware, (req, res) => {
+  res.render("create-bookings", { errors: {} });
+});
 
 app.post("/create-bookings", bookingsCon.create);
 app.get("/update-bookings/:id", bookingsCon.edit);

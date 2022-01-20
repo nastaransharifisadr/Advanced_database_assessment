@@ -7,17 +7,16 @@
         <a class="nav-link active" href="/">
           Home <span class="sr-only">(current)</span>
         </a>
-        <a class="nav-link" href="services"> View Services</a>
-        <a class="nav-link" href="create-bookings"> create Bookings </a>
+        <a class="nav-link" href="view-services"> View Services</a>
+        <a class="nav-link" href="create-bookings"> Create Bookings </a>
       
         <% if(user) { %>
-        <a class="nav-link" href="saved-bookings"> Search Bookings</a>
-        <a class="nav-link" href="services">Add/remove services</a>
+        <a class="nav-link" href="services">Edit services</a>
         <a class="nav-link" href="bookings"> Check Bookings</a>
-        <a class="nav-link" href="join"> Register </a>
+        <a class="nav-link" href="join"> Add Admin </a>
         <a class="nav-link" href="logout"> <%= user.email %> (Logout) </a> <%
         }%> <% if(!user) { %>
-        <a class="nav-link" href="login"> Login </a>
+        <a class="nav-link" href="login"> Admin </a>
         <% } %>
       </div>
     </div>

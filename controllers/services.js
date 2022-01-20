@@ -9,7 +9,7 @@ exports.list = async(req,res) => {
     {
     const services =await Services.find({});
     console.log(services);
-    res.render("services",{services:services});
+    res.render("view-services",{services:services});
 
     }catch(e){
     res.status(404).send ({ message: "could not list Services" });
