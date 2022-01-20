@@ -21,13 +21,14 @@
   <div class="container">
     
   
-   
+    
    <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
-     
-   <button type="button" class="btn btn-primary">Create a new booking</button> 
+    <% if(!user) { %> 
+   <button type="button" class="btn btn-primary" href="create-bookings.ejs">Create a new booking</button> <%
+   }%> 
    <h1 class="mx-auto"> salon bookings  </h1>
  
- 
+   
    <table class="table table-striped custab">
    <thead>
        <tr>
@@ -51,8 +52,11 @@
                <td><%=  book.lastname  %></td>
                <td><%=  book.email  %></td>
                <td><%=  book.daterequest %></td>
+               <% if(user) { %>
                <td class="text-center"><a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> 
-               <a  href="/bookings/delete/<%= book.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+               <a  href="/bookings/delete/<%= book.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td><%
+            }%> 
+         
            </tr>
            
         <%  

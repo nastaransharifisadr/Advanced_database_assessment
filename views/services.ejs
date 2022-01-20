@@ -16,16 +16,22 @@
 
 
   <%- include('common/header'); %>
+    
+        
+   
 
   <div class="container">
     
     
    
    <h1 class="text-justify"> services  </h1>
-   <div class="col-md-12 col-md-offset-2  justify-content-center">
-     <a role="button" class="btn btn-primary btn-xs" href="/create-services">Create a new service</a> 
+   <% if(user) { %>
+    <div class="col-md-12 col-md-offset-2  justify-content-center">
+      <a role="button" class="btn btn-primary btn-xs" href="/create-services">Create a new service</a> 
+    
+    </div><%
+   }%> 
    
-   </div>
      
      <div class="col-md-12 col-md-offset-2">
      
@@ -48,9 +54,12 @@
                    <td><%= service._id  %></td>
                    <td><%=  service.service_name  %></td>
                    <td><%=  service.Price  %></td>
+                    <% if(user) { %>
+                      <td class="text-center"><a class='btn btn-info btn-xs' href="/services/Edit/<%= service.id %>" ><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                      <a  href="/services/delete/<%= service.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> <%
+                      }%> 
                    
-                   <td class="text-center"><a class='btn btn-info btn-xs' href="/services/Edit/<%= service.id %>" ><span class="glyphicon glyphicon-edit"></span> Edit</a> 
-                     <a  href="/services/delete/<%= service.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                
                     
                </tr>
                

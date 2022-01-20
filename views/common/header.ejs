@@ -5,13 +5,11 @@
     <div class="navbar">
       <div class="navbar-nav">
         <a class="nav-link active" href="/">
-          Home <span class="sr-only">(current)</span>
+         Services<span class="sr-only">(current)</span>
         </a>
-        <a class="nav-link" href="view-services"> View Services</a>
-        <a class="nav-link" href="create-bookings"> Create Bookings </a>
+        <a class="nav-link" href="bookings"> Create Bookings </a>
       
         <% if(user) { %>
-        <a class="nav-link" href="services">Edit services</a>
         <a class="nav-link" href="bookings"> Check Bookings</a>
         <a class="nav-link" href="join"> Add Admin </a>
         <a class="nav-link" href="logout"> <%= user.email %> (Logout) </a> <%
@@ -33,7 +31,8 @@
             <div class="col-lg-6">
                 <h1 class="mt-3">Diamond</h1>
                 <p class="lead text-secondary my-5">Nail Spa Beauty</p>
-                <a href="#" class="btn btn-outline-secondary btn-lg border">Book Now</a>
+                <p class="lead text-secondary my-5">Quality more important than quantity</p>
+                <a href="bookings" class="btn btn-outline-secondary btn-lg border">Book Now</a>
             </div>
         </div>
     </div>

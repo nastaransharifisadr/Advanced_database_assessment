@@ -14,5 +14,13 @@
     {
         "service_name":"Facial",
         "price":45
+    },
+    {
+        "service_name":"Classic lash extension",
+        "price":55
+    },
+    {
+        "service_name":"Hybrid lash extension",
+        "price":70
     }
 ]
