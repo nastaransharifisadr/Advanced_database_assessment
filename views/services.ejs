@@ -44,29 +44,54 @@
    
            </tr>
    
-           <%  
-           
-             services.forEach(service => {
-               
-           %>
-   
+
+           <%             
+             services.forEach(service => {               
+           %>  
                <tr>
                    <td><%= service._id  %></td>
-                   <td><%=  service.service_name  %></td>
-                   <td><%=  service.price  %></td>
+                   <td><%= service.service_name  %></td>
+                   <td><%= service.price  %></td>
                     <% if(user) { %>
                       <td class="text-center"><a class='btn btn-info btn-xs' href="/services/Edit/<%= service.id %>" ><span class="glyphicon glyphicon-edit"></span> Edit</a> 
                       <a  href="/services/delete/<%= service.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> <%
-                      }%> 
-                   
-                
-                    
+                    }%>                      
                </tr>
                
             <%  
              });
             %>
-   
+   The next step is showing a table connected to services collection. in this table again if admin logs in, then two buttons will be showed to admin to edit or deleting services.
+   ```
+   <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Service_name</th>
+            <th>Price</th>
+
+        </tr>
+
+
+        <%             
+          services.forEach(service => {               
+        %>  
+            <tr>
+                <td><%= service._id  %></td>
+                <td><%= service.service_name  %></td>
+                <td><%= service.price  %></td>
+                 <% if(user) { %>
+                   <td class="text-center"><a class='btn btn-info btn-xs' href="/services/Edit/<%= service.id %>" ><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                   <a  href="/services/delete/<%= service.id %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> <%
+                 }%>                      
+            </tr>
+            
+         <%  
+          });
+         %>
+
+
+
 
 
 
